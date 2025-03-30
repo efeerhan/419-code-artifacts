@@ -4,7 +4,7 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } f
 // Add base URL configuration
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
   ? '' // Empty string means same domain in production
-  : 'http://localhost:5001'; // Development URL
+  : 'http://localhost:8000'; // Development URL
 
 function App() {
   const [selectedCombinations, setSelectedCombinations] = useState([]);

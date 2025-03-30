@@ -3,12 +3,14 @@ from flask_cors import CORS, cross_origin
 import pandas as pd
 import os
 
+# Get the absolute path to the static folder
+static_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+
 app = Flask(__name__, 
-    static_folder='static',
+    static_folder=static_folder,
     static_url_path='/static')  # Explicitly set the static URL path
 CORS(app, resources={ r"/*": { "methods": ["GET"] }})
 
-import os
 df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'res.csv'))
 
 def get_bool(val):
@@ -17,19 +19,19 @@ def get_bool(val):
 # Serve React App
 @app.route('/')
 def serve():
-    return send_from_directory(app.static_folder, 'index.html')
+    return send_from_directory(static_folder, 'index.html')
 
 # Serve static files
 @app.route('/static/<path:path>')
 def serve_static(path):
-    return send_from_directory(app.static_folder, path)
+    return send_from_directory(static_folder, path)
 
 # Fallback route for client-side routing
 @app.route('/<path:path>')
 def catch_all(path):
     if path.startswith('static/'):
-        return send_from_directory(app.static_folder, path[7:])
-    return send_from_directory(app.static_folder, 'index.html')
+        return send_from_directory(static_folder, path[7:])
+    return send_from_directory(static_folder, 'index.html')
 
 @app.route('/get_rmse_data', methods=['GET'])
 def get_rmse_data():
@@ -72,5 +74,5 @@ def get_rmse_data():
     return jsonify(response)
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 10000))
+    port = int(os.environ.get("PORT", 8000))  # Default to 8000 if PORT not set
     app.run(debug=False, host="0.0.0.0", port=port)
