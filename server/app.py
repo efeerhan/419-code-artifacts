@@ -3,26 +3,33 @@ from flask_cors import CORS, cross_origin
 import pandas as pd
 import os
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__, 
+    static_folder='static',
+    static_url_path='/static')  # Explicitly set the static URL path
 CORS(app, resources={ r"/*": { "methods": ["GET"] }})
 
+import os
 df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'res.csv'))
 
 def get_bool(val):
     return str(val).lower() == 'true'
 
-# Serve React App at root
+# Serve React App
 @app.route('/')
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
-# Serve all other static files
-@app.route('/<path:path>')
+# Serve static files
+@app.route('/static/<path:path>')
 def serve_static(path):
-    if os.path.exists(os.path.join(app.static_folder, path)):
-        return send_from_directory(app.static_folder, path)
-    return send_from_directory(app.static_folder, 'index.html')
+    return send_from_directory(app.static_folder, path)
 
+# Fallback route for client-side routing
+@app.route('/<path:path>')
+def catch_all(path):
+    if path.startswith('static/'):
+        return send_from_directory(app.static_folder, path[7:])
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/get_rmse_data', methods=['GET'])
 def get_rmse_data():
