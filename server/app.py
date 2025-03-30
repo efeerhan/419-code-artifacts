@@ -6,7 +6,8 @@ import os
 app = Flask(__name__)
 CORS(app, resources={ r"/*": { "methods": ["GET"] }})
 
-df = pd.read_csv('res.csv')
+import os
+df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'res.csv'))
 
 def get_bool(val):
     return str(val).lower() == 'true'

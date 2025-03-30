@@ -1,6 +1,6 @@
 # Stage 1: Building the React frontend
 
-FROM node:16-slim AS client-builder
+FROM node:18-alpine AS client-builder
 WORKDIR /app                           
 COPY client/package*.json ./
 RUN npm install
