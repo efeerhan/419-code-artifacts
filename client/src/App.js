@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+// Add base URL configuration
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? '' // Empty string means same domain in production
+  : 'http://localhost:5001'; // Development URL
+
 function App() {
   const [selectedCombinations, setSelectedCombinations] = useState([]);
   const [rmseData, setRmseData] = useState([]);
@@ -46,7 +51,7 @@ function App() {
           selectedCombinations.map(async (comboId) => {
             const combo = combinations.find(c => c.id === comboId);
             const query = `?gender=${combo.gender}&age=${combo.age}&occupation=${combo.occupation}`;
-            const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5001'}/get_rmse_data${query}`);
+            const response = await fetch(`${API_BASE_URL}/get_rmse_data${query}`);
             
             if (!response.ok) throw new Error(`Failed to fetch data for ${combo.feature}`);
             const data = await response.json();
