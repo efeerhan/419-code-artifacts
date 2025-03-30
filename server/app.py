@@ -4,17 +4,7 @@ import pandas as pd
 import os
 
 app = Flask(__name__)
-CORS(app, resources={
-    r"/*": {
-        "origins": [
-            "http://localhost:3000",
-            "https://your-frontend-domain.netlify.app",  # Replace with your actual frontend URL
-            "https://your-frontend-domain.vercel.app"     # Replace with your actual frontend URL
-        ],
-        "methods": ["GET"],
-        "allow_headers": ["Content-Type"]
-    }
-})
+CORS(app, resources={ r"/*": { "methods": ["GET"] }})
 
 df = pd.read_csv('res.csv')
 
@@ -62,4 +52,5 @@ def get_rmse_data():
     return jsonify(response)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    port = int(os.environ.get("PORT", 5001))
+    app.run(debug=True, host="0.0.0.0", port=port)
