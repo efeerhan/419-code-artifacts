@@ -1,5 +1,5 @@
 # Privacy-Aware Recommender Systems
-Read the full writeup [here](https://youtu.be/b0KKqEMGnR0?t=83)
+Read the full writeup [here](https://docs.google.com/document/d/1YgTmmIbc2vnWrUEzgu6B2JCrUGZYtJbPjWg0UrSgCzs/edit?usp=sharing).
 
 ## Overview
 Recommender systems play a foundational role in modern digital platforms, leveraging both explicit and implicit user data to provide personalized content. However, the extensive data collection required for these systems has raised significant privacy concerns. Our project investigates the impact of privacy-driven data withholding on the performance of recommender systems and explores the trade-offs between individual privacy, system utility, and data governance.
