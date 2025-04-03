@@ -23,7 +23,7 @@ We construct two interdependent systems:
   - Import `user.csv` and `rating.csv` into PySpark DataFrames.
   - Encode categorical demographic features.
   - Apply **KMeans clustering** with 20 clusters.
-  - Train the recommendation model iteratively over **224 scenarios**, varying feature subsets and sample sizes.
+  - Train the recommendation model iteratively over **256 scenarios**: 8 feature combinations times 32 linearly-spaced subset sizes from 20% to 100%.
   - Visualize RMSE results via an interactive UI.
 
 ## Key Finding
