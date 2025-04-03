@@ -1,55 +1,33 @@
-# Effects of Privacy-Driven Data Leverage on Recommender System Performance
+# Privacy-Aware Recommender Systems
+Read the full writeup [here](https://youtu.be/b0KKqEMGnR0?t=83)
 
 ## Overview
+Recommender systems play a foundational role in modern digital platforms, leveraging both explicit and implicit user data to provide personalized content. However, the extensive data collection required for these systems has raised significant privacy concerns. Our project investigates the impact of privacy-driven data withholding on the performance of recommender systems and explores the trade-offs between individual privacy, system utility, and data governance.
 
-As recommender systems become more integrated into digital platforms, privacy concerns around data collection grow. Our project explores how withholding or altering user data impacts the performance of recommendation algorithms. We analyze the trade-offs between personal privacy protection and algorithmic accuracy while examining the role of social inference in compensating for missing inputs.
+## Objectives
+This study aims to:
+- Analyze the consequences of privacy-preserving behaviors (e.g., data withholding, obfuscation) on recommendation system performance.
+- Explore how recommender systems compensate for missing data using social inference techniques.
+- Develop a Privacy Visualization Tool (PVT) to enhance user awareness and autonomy over their personal data usage in recommendation algorithms.
+- Examine the role of data governance in ensuring ethical, transparent, and accountable AI-driven recommendations.
 
-## Authors
+## Methodology
+We construct two interdependent systems:
+1. **Privacy Visualization Tool (PVT):** Enables users to see the effect of withholding personal information on recommendation accuracy.
+2. **Recommender System:** Built using the **MovieLens dataset**, this system estimates changes in recommendations based on varying levels of data withholding.
 
-Nida Anwar, Efe Erhan, Katya Kubyshkin, Zoe Stanley\
-Simon Fraser University, School of Computing Science\
-April 3rd, 2025
+### Data Processing
+- **Dataset:** MovieLens (user ratings and demographic data)
+- **Technologies Used:** Python, Pandas, PySpark, Flask, React
+- **Steps:**
+  - Import `user.csv` and `rating.csv` into PySpark DataFrames.
+  - Encode categorical demographic features.
+  - Apply **KMeans clustering** with 20 clusters.
+  - Train the recommendation model iteratively over **224 scenarios**, varying feature subsets and sample sizes.
+  - Visualize RMSE results via an interactive UI.
 
-## Research Focus
+## Key Finding
+- Withholding demographic data reduces recommendation accuracy, most notable at lower data sample sizes, affirming the role of personal data in improving content filtering.
 
-Our study investigates:
-
-- How privacy-driven data withholding ("leverage") affects recommender system performance.
-- The impact of training a recommendation model on different combinations of demographic features.
-
-## Methods
-
-We implement a recommender system using:
-
-- **Algorithms:** Alternating Least Squares (matrix factorization), KMeans (clustering)
-- **Data sources:** MovieLens 1M (rating.csv, user.csv)
-- **Analysis Techniques:** Feature exclusion, subsampling, and RMSE performance comparisons.
-
-## Key Findings
-
-- Including more user data improves recommendation accuracy, but some features are more influential than others.
-
-## Privacy Visualization Tool
-
-We developed a **Feature Impact Visualizer**, which provides insights into how individual data attributes affect recommendation performance. This tool aims to increase user awareness of data-driven personalization by demonstrating the empirical risk delta between models that use more or less demographic information.
-
-## Contribution Statement
-
-All team members contributed equally, collaborating on research, implementation, and documentation. Specific roles included:
-
-- **Recommender system development:** Efe, Katya
-- **Front-end visualization tool:** Katya
-- **Report writing and analysis:** Zoe, Nida, Katya, Efe
-
-## References
-
-Our research builds on work in data governance, machine learning, and human-centered AI. See our full report for citations and further reading.
-
-## License
-
-This project is licensed under the MIT License.
-
-## Contact
-
-For inquiries or contributions, please contact us via GitHub Issues or email.
-
+## Conclusion
+Understanding how personal data influences recommender systems is crucial for both users and researchers. By visualizing the trade-offs between privacy, recommendation performance, and **data governance**, we hope to empower individuals to make informed decisions about their digital footprints. This project contributes to the ongoing discourse on human-centered AI, data governance, and privacy-preserving technologies, advocating for stronger ethical oversight and user agency in digital ecosystems.
